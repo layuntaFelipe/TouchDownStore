@@ -26,6 +26,22 @@ struct ContentView: View {
                     VStack(spacing: 0){
                         FeaturedTabView()
                             .padding(.vertical, 20)
+                        
+                        CategoryGridView()
+                        
+                        TitleView(title: "Helmets")
+                        
+                        LazyVGrid(columns: gridLayout, spacing: 15, content: {
+                            ForEach(products) {product in
+                                ProductItemView(product: product)
+                            }
+                        })
+                        .padding(15)
+                        
+                        TitleView(title: "Teams")
+                        
+                        TeamGridView()
+                        
                         FooterView()
                             .padding(.horizontal)
                     }//VSTACK
