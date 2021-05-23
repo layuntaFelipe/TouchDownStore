@@ -10,6 +10,7 @@ import SwiftUI
 struct TopPartDetailView: View {
     
     @State private var isAnimating: Bool = false
+    @EnvironmentObject var shop: Shop
     
     var body: some View {
         HStack(alignment: .center, spacing: 6, content: {
@@ -18,7 +19,7 @@ struct TopPartDetailView: View {
                 Text("Price")
                     .fontWeight(.semibold)
                 
-                Text(sampleProduct.formattedPrice)
+                Text(shop.selectedProduct?.formattedPrice ?? sampleProduct.formattedPrice)
                     .font(.largeTitle)
                     .fontWeight(.black)
                     .scaleEffect(1.35, anchor: .leading)
@@ -26,7 +27,7 @@ struct TopPartDetailView: View {
             .offset(y: isAnimating ? -50 : -75)
             Spacer()
             //PHOTO
-            Image(sampleProduct.image)
+            Image(shop.selectedProduct?.image ?? sampleProduct.image)
                 .resizable()
                 .scaledToFit()
                 .offset(y: isAnimating ? 0 : -35)
@@ -44,5 +45,6 @@ struct TopPartDetailView_Previews: PreviewProvider {
         TopPartDetailView()
             .previewLayout(.sizeThatFits)
             .padding()
+            .environmentObject(Shop())
     }
 }
